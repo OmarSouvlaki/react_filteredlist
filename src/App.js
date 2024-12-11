@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import FilteredList from './components/FilteredList';
+import SearchBox from './components/SearchBox';
 import './App.css';
 
-function App() {
+const App = () => {
+
+  const [items] = useState([
+     'El Silencio de los Inocentes, 1997',
+     'Trainspotting, 1993',
+     'Requiem por un Sueño, 2001',
+     'El club de la Pelea, 2004',
+     'Hooligans, 2001',
+     'Donnie Darko, 1989',
+  ]);
+  
+
+  const [searchText, setSearchText] = useState('');
+
+
+  const handleSearchChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Filtrar Elementos</h1>
+      <SearchBox onSearchChange={handleSearchChange} />
+      <FilteredList items={items} searchText={searchText} />
     </div>
   );
-}
+};
 
 export default App;
